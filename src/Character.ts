@@ -61,8 +61,15 @@ export default class Character implements Fighter {
   }
 
   attack(enemy: Fighter): void {
-    const damage = enemy.receiveDamage(this.strength);
-    console.log(`Inflicted \x1b[01;31m${damage}\x1b[00m points of damage!`);
+    const prevEnemyLife = enemy.lifePoints;
+    enemy.receiveDamage(this.strength);
+    const nextEnemyLife = enemy.lifePoints;
+    const damage = prevEnemyLife - nextEnemyLife;
+    if (damage >= 1) {
+      console.log(`Inflicted \x1b[01;31m${damage}\x1b[00m points of damage!`);
+    } else {
+      console.log('Inflicted no damage.');
+    }
   }
 
   special(enemy: Fighter): void {
