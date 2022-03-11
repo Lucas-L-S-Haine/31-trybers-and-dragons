@@ -72,9 +72,22 @@ export default class Character implements Fighter {
     }
   }
 
-  special(enemy: Fighter): void {
+  async special(enemy: Fighter): Promise<void> {
+    this._strength *= 4;
+    const target = enemy as Character;
     console.log(`Building up ${this.energy.type_}...`);
-    setTimeout(() => console.log(`Attacked enemy ${enemy}`), 1);
+    let timer = 5;
+    const countdown = () => {
+      console.log(`${timer}...`);
+      timer -= 1;
+    };
+    const intervalId = setInterval(countdown, 1000);
+    setTimeout(() => clearInterval(intervalId), 6000);
+    setTimeout(() => {
+      console.log(`Attacked enemy \x1b[01;93m${target.race.name}\x1b[00m!`);
+      this.attack(enemy);
+      this._strength /= 4;
+    }, 6000);
   }
 
   receiveDamage(attackPoints: number): number {
