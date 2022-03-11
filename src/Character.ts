@@ -83,7 +83,11 @@ export default class Character implements Fighter {
     if (this._lifePoints <= 0) {
       this._lifePoints = -1;
     }
-    console.log(`Received \x1b[01;31m${damage}\x1b[00m points of damage!`);
+    if (damage >= 1) {
+      console.log(`Received \x1b[01;31m${damage}\x1b[00m points of damage!`);
+    } else {
+      console.log('Received no damage.');
+    }
     return this._lifePoints;
   }
 
