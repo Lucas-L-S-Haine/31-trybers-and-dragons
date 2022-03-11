@@ -1,4 +1,4 @@
-export default class Archetype {
+export default abstract class Archetype {
   private _name: string;
   special: number;
   cost: number;
